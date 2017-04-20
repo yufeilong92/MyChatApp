@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyChatApp</string>
+
+    <string name="send">发送</string>
+    <string name="photo">照片</string>
+    <string name="here">位置</string>
+</resources>
