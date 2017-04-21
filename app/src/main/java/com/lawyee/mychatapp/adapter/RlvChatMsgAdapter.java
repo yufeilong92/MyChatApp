@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.lawyee.mychatapp.R;
 import com.lawyee.mychatapp.bean.ChatMsg;
+import com.lawyee.mychatapp.ui.ImageUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -81,9 +82,9 @@ public class RlvChatMsgAdapter extends RecyclerView.Adapter<RlvChatMsgAdapter.Vi
                 // TODO: 2017/4/20 加载本地图片进行处理
                 viewHolder.mTvChatShowCon.setVisibility(View.GONE);
                 viewHolder.mIvChatShowPic.setVisibility(View.VISIBLE);
-                Bitmap bitmap = getLoacalBitmap(chatMsg.getContent());
+                String newPath = ImageUtil.bitampToString(mContext, chatMsg.getContent(), ""+ i);
+                Bitmap bitmap = ImageUtil.getloadPicBitmap(newPath);
                 viewHolder.mIvChatShowPic.setImageBitmap(bitmap);
-
                 break;
             default:
                 break;

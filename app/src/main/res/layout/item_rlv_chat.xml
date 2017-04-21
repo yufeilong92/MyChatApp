@@ -5,15 +5,17 @@
     android:orientation="horizontal">
 
     <TextView
+        android:layout_gravity="center"
         android:visibility="gone"
         android:id="@+id/tv_chat_showCon"
         android:text="222"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
+        android:layout_gravity="center"
         android:visibility="gone"
         android:id="@+id/iv_chat_showPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
 
 </LinearLayout>

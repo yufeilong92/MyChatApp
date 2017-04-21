@@ -274,12 +274,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void handlPictures(ArrayList<String> path) {
-        if (path.size() == 1) {
+        if (path.size() == 1) {//单张照片
             ChatMsg chatMsg = new ChatMsg(path.get(0), 1);
             lists.add(chatMsg);
             mRlvChatMsgAdapter.notifyItemInserted(lists.size() - 1);//有消息是显示
             //刷新数据
             mRlvMainChat.smoothScrollToPosition(lists.size() - 1);//将消息放在rcyclerview
+        }else if (path.size()>1){//多张照片
+            for (int i = 0; i < path.size(); i++) {
+
+                ChatMsg chatMsg = new ChatMsg(path.get(i), 1);
+                lists.add(chatMsg);
+                mRlvChatMsgAdapter.notifyItemInserted(lists.size() - 1);//有消息是显示
+                //刷新数据
+                mRlvMainChat.smoothScrollToPosition(lists.size() - 1);//将消息放在rcyclerview
+            }
+
         }
 
     }
