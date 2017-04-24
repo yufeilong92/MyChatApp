@@ -38,6 +38,7 @@ public class GlobalOnItemClickManager {
 		mEditText = editText;
 	}
 
+
 	public AdapterView.OnItemClickListener getOnItemClickListener(final int emsPos, final Context context) {
 		return new AdapterView.OnItemClickListener() {
 			@Override
@@ -60,4 +61,5 @@ public class GlobalOnItemClickManager {
 			}
 		};
 	}
+
 }

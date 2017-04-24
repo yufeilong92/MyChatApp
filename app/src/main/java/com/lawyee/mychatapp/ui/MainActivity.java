@@ -196,6 +196,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
     }
 
+    /**
+     * 处理布局返回按钮
+     */
     @Override
     public void onBackPressed() {
         if (!emotionKeyboard.interceptBackPress()) {

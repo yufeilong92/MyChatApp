@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.lawyee.mychatapp.R;
 import com.lawyee.mychatapp.bean.ChatMsg;
 import com.lawyee.mychatapp.ui.ImageUtil;
+import com.lawyee.mychatapp.util.SpanStringUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -74,7 +76,9 @@ public class RlvChatMsgAdapter extends RecyclerView.Adapter<RlvChatMsgAdapter.Vi
             case 0://只显示文字
                 viewHolder.mTvChatShowCon.setVisibility(View.VISIBLE);
                 viewHolder.mIvChatShowPic.setVisibility(View.GONE);
-                viewHolder.mTvChatShowCon.setText(chatMsg.getContent());
+                //匹配相应表情
+                SpannableString emotionContent = SpanStringUtils.getEmotionContent(mContext, viewHolder.mTvChatShowCon, chatMsg.getContent());
+                viewHolder.mTvChatShowCon.setText(emotionContent);
 
                 break;
             case 1://单张图片
@@ -82,7 +86,7 @@ public class RlvChatMsgAdapter extends RecyclerView.Adapter<RlvChatMsgAdapter.Vi
                 // TODO: 2017/4/20 加载本地图片进行处理
                 viewHolder.mTvChatShowCon.setVisibility(View.GONE);
                 viewHolder.mIvChatShowPic.setVisibility(View.VISIBLE);
-                String newPath = ImageUtil.bitampToString(mContext, chatMsg.getContent(), ""+ i);
+                String newPath = ImageUtil.bitampToString(mContext, chatMsg.getContent(), "" + i);
                 Bitmap bitmap = ImageUtil.getloadPicBitmap(newPath);
                 viewHolder.mIvChatShowPic.setImageBitmap(bitmap);
                 break;
@@ -93,10 +97,10 @@ public class RlvChatMsgAdapter extends RecyclerView.Adapter<RlvChatMsgAdapter.Vi
 
     }
 
-    private static Bitmap getLoacalBitmap(String url){
+    private static Bitmap getLoacalBitmap(String url) {
         try {
             FileInputStream inputStream = new FileInputStream(url);
-               return BitmapFactory.decodeStream(inputStream);///把流转化为Bitmap图片
+            return BitmapFactory.decodeStream(inputStream);///把流转化为Bitmap图片
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -105,6 +109,7 @@ public class RlvChatMsgAdapter extends RecyclerView.Adapter<RlvChatMsgAdapter.Vi
 
 
     }
+
     @Override
     public int getItemCount() {
         return mData.size();

@@ -9,14 +9,14 @@
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="7"
-        android:columnWidth="40dp"
-        android:stretchMode="columnWidth"
-        android:padding="8dp"
         android:clipToPadding="false"
-        android:scrollbarStyle="outsideOverlay"
-        android:verticalSpacing="16dp"
+        android:columnWidth="40dp"
         android:horizontalSpacing="8dp"
-        android:listSelector="@drawable/emotion_item_click_selector"/>
+        android:listSelector="@drawable/emotion_item_click_selector"
+        android:numColumns="7"
+        android:padding="8dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="16dp" />
 
 </LinearLayout>
