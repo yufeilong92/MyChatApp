@@ -24,6 +24,34 @@ public class ChatMsg {
     private int type;
     private String picturePath;
     private int picture;
+    double latitude;//纬度
+    double longitude;//经度；
+    String title;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     private List<String> paths;
 
     public int getPicture() {
@@ -53,6 +81,18 @@ public class ChatMsg {
         this.picture = picture;
     }
 
+    /**
+     *
+     * @param title 地图位置
+     * @param latitude 纬度
+     * @param longitude 经度
+     */
+    public ChatMsg (String title,double latitude,double longitude ,int type){
+        this.title=title;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        this.type=type;
+    }
     /**
      * @param content 内容
      * @param type    判断类型 0位内容 1 为 图片

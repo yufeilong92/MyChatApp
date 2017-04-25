@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.lawyee.mychatapp.R;
 import com.lawyee.mychatapp.adapter.RlvAdapter;
 import com.lawyee.mychatapp.adapter.RlvChatMsgAdapter;
+import com.lawyee.mychatapp.baidu.BaiduMapActivity;
 import com.lawyee.mychatapp.bean.ChatMsg;
 import com.lawyee.mychatapp.bean.RlvItemContent;
 import com.lawyee.mychatapp.util.EmotionKeyboard;
@@ -74,7 +75,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initView();
         initContent();
         bindToEmotionKeyboard();
+        initClick();
 
+    }
+
+    private void initClick() {
+        mRlvChatMsgAdapter.setOnItemListener(new RlvChatMsgAdapter.OnRecyclerViewItemListener() {
+            @Override
+            public void setOnItemListener(View view, ChatMsg msg, int position) {
+                int type = msg.getType();//地图点击事件
+                if (type==2){
+                    Intent intent = new Intent(MainActivity.this, BaiduMapActivity.class);
+                    intent.putExtra(BaiduMapActivity.LATITUDE, msg.getLatitude());
+                    intent.putExtra(BaiduMapActivity.LONGITUDE, msg.getLongitude());
+                    intent.putExtra(BaiduMapActivity.ADDRESS, msg.getTitle());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
 
@@ -152,6 +170,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     startActivityForResult(intent, REQUESTCODE);
                 } else if (data.equals(getString(R.string.here))) {//位置
                     Toast.makeText(MainActivity.this, "位置", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, BaiduMapActivity.class);
+                    startActivityForResult(intent, 10001);
+
                 }
 
             }
@@ -271,21 +292,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (resultCode == RESULTCODE) {
             ArrayList<String> path = data.getStringArrayListExtra("path");
             handlPictures(path);
-
             Log.d("回调结果", "===" + path.size());
+        } else if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 10001:
+                    double latitude = data.getDoubleExtra("latitude", 0);
+                    double longitude = data.getDoubleExtra("longitude", 0);
+                    String locationAddress = data.getStringExtra("address");
+                    String locationName = data.getStringExtra("name");
+                    String str = "latitude: " + latitude + "\n" + "longitude: " + longitude + "\n" +
+                            "locationAddress: " + locationAddress + "\n" +
+                            "locationName: " + locationName;
+//                    info.setText(str);
+                    Log.d("=====",str+"");
+                   handlMap(locationAddress,latitude,longitude);
+                    break;
+            }
         }
     }
 
+    private void handlMap(String locationAddress, double latitude, double longitude) {
+        ChatMsg chatMsg = new ChatMsg(locationAddress,latitude,longitude,2);
+        lists.add(chatMsg);
+        mRlvChatMsgAdapter.notifyItemInserted(lists.size() - 1);//有消息是显示
+        //刷新数据
+        mRlvMainChat.smoothScrollToPosition(lists.size() - 1);//将消息放在rcyclerview
+    }
+
+
+
     private void handlPictures(ArrayList<String> path) {
+
         if (path.size() == 1) {//单张照片
             ChatMsg chatMsg = new ChatMsg(path.get(0), 1);
             lists.add(chatMsg);
             mRlvChatMsgAdapter.notifyItemInserted(lists.size() - 1);//有消息是显示
             //刷新数据
             mRlvMainChat.smoothScrollToPosition(lists.size() - 1);//将消息放在rcyclerview
-        }else if (path.size()>1){//多张照片
+        } else if (path.size() > 1) {//多张照片
             for (int i = 0; i < path.size(); i++) {
-
                 ChatMsg chatMsg = new ChatMsg(path.get(i), 1);
                 lists.add(chatMsg);
                 mRlvChatMsgAdapter.notifyItemInserted(lists.size() - 1);//有消息是显示

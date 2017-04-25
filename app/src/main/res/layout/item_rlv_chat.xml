@@ -3,25 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+        <ImageView
+            android:background="@drawable/item_chathear_bg"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:id="@+id/iv_showHear"
+            android:src="@mipmap/chat_hear"
+            android:layout_gravity="center"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
 
-    <TextView
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/tv_chat_showCon"
-        android:text="222"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/et_showEmoji"
-        android:background="@null"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/iv_chat_showPic"
-        android:layout_width="56dp"
-        android:layout_height="56dp" />
+        <TextView
+            android:id="@+id/tv_chat_showCon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="222"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/et_showEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_chat_showPic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/showMapLl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_showMapTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11111111111111" />
+
+            <ImageView
+                android:id="@+id/iv_showMapPic"
+                android:layout_width="240dp"
+                android:layout_height="160dp" />
+        </LinearLayout>
+
 
 </LinearLayout>

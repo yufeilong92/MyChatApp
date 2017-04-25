@@ -1,5 +1,6 @@
 package com.lawyee.mychatapp.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import com.lawyee.mychatapp.util.ActivityContorl;
  */
 
 
-public class BaseActivity extends AppCompatActivity{
+public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,4 +37,11 @@ public class BaseActivity extends AppCompatActivity{
         ActivityContorl.removerActivity(this);
     }
 
+    public ProgressDialog showdialog(String title, String msg) {
+        ProgressDialog dialog = new ProgressDialog(BaseActivity.this);
+        dialog.setTitle(title);
+        dialog.setMessage(msg);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        return dialog;
+    }
 }

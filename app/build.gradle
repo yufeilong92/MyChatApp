@@ -35,6 +35,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/picasso-2.5.2.jar')
     compile 'com.android.support:recyclerview-v7:25.3.0'
-    compile files('libs/BaiduLBS_Android.jar')
-    compile files('libs/IndoorscapeAlbumPlugin.jar')
 }
